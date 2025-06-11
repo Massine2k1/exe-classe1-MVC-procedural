@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,11 +12,12 @@
     <!-- CSS personnalisé -->
     <link href="assets/css/style.css" rel="stylesheet">
 </head>
+
 <body>
     <!-- Navigation -->
-     <?php
-     include "menu.html.php"
-     ?>
+    <?php
+    include "menu.html.php"
+    ?>
 
     <!-- Admin Dashboard -->
     <div class="container-fluid mt-5 pt-4">
@@ -180,32 +182,69 @@
                     <div class="col-md-6">
                         <div class="card mb-4">
                             <div class="card-header">
-                                <h5 class="mb-0">Actions rapides</h5>
+                                <h5 class="mb-0">Insérer un article</h5>
                             </div>
                             <div class="card-body">
-                                <div class="d-grid gap-2">
-                                    <button class="btn btn-primary" type="button">
-                                        <i class="fas fa-plus me-2"></i>Créer un nouvel article
-                                    </button>
-                                    <button class="btn btn-success" type="button">
-                                        <i class="fas fa-user-plus me-2"></i>Ajouter un utilisateur
-                                    </button>
-                                    <button class="btn btn-info" type="button">
-                                        <i class="fas fa-cog me-2"></i>Paramètres du site
-                                    </button>
+                                <div class="p-3">
+                                    <?php
+                                    if (isset($error)):
+                                    ?>
+                                        <p class="text-danger"><?= $error ?></p>
+                                    <?php
+                                    endif;
+                                    ?>
                                 </div>
+                                <form action="" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+                                    <div class="row gy-4">
+                                        <div class="col-md-12">
+                                            <input type="text" name="articletitle" class="form-control" placeholder="Votre titre" required>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <textarea class="form-control" name="articletext" rows="8" placeholder="Message" required=""></textarea>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <input class="form-check-input" type="checkbox" name="articlePublished" id="publishCheckbox" value="1">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Publié ?
+                                            </label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3" id="dateContainer">
+                                                <label for="publishDate" class="form-label">Date de publication :</label>
+                                                <input name="articledatepublished" type="datetime-local" class="form-control" id="publishDate">
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Créer l'article</button>
+
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="card">
+                        <div class="card h-100" style="max-height:600px;">
                             <div class="card-header">
-                                <h5 class="mb-0">Statistiques du site</h5>
+                                <h5 class="mb-0">Articles</h5>
                             </div>
-                            <div class="card-body">
-                                <div class="chart-container" style="position: relative; height: 200px;">
-                                    <canvas id="statsChart"></canvas>
-                                </div>
+                            <div class="card-body" style="overflow-y: auto;">
+                                <?php
+                                if (!empty($article)):
+                                    foreach ($article as $articles):
+                                ?>
+                                        <div class="card my-3">
+                                            <div class="card-header">
+                                                <h6><?= $articles['title'] ?></h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <p><?= $articles['article_text'] ?></p>
+                                            </div>
+                                        </div>
+                                <?php
+                                    endforeach;
+                                endif;
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -237,4 +276,5 @@
     <!-- JS personnalisé -->
     <script src="assets/js/admin.js"></script>
 </body>
+
 </html>

@@ -12,17 +12,18 @@ require_once "../config-dev.php";
 
 
 // notre connexion PDO
-try{
+try {
     // instanciation de PDO
-    $db = new PDO(DB_DSN,
+    $db = new PDO(
+        DB_DSN,
         DB_LOGIN,
         DB_PWD,
         [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        ]);
-
-}catch(Exception $e){
+        ]
+    );
+} catch (Exception $e) {
     die($e->getMessage());
 }
 
@@ -40,6 +41,8 @@ var_dump($_SESSION);
 echo '<h3>$_POST</h3>';
 var_dump($_POST);
 echo '</div></div>';
+echo '<h4>getArticlePublished</h4>';
+var_dump($article);
 
 
 // bonne pratique

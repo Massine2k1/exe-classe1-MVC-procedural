@@ -1,38 +1,39 @@
 <?php
 # model/ArticleModel.php
-function addArticle(PDO $conn, array $datas,int $iduser): bool
+function addArticle(PDO $conn, array $datas, int $iduser): bool
 
 {
-    $sql = "INSERT INTO `article` (`title`,`articletext`,`articledatecreated`, `articlepublished`,`user_iduser`) VALUES (?,?,?,?,?);";
+    $sql = "INSERT INTO `article` (`title`,`slug`,`articletext`,`articledatecreated`, `articlepublished`,`user_iduser`) VALUES (?,?,?,?,?,?);";
     $query = $conn->prepare($sql);
-    
-    if(isset($datas['articlePublished'])){
-        $isPublished = 1;
-        $datePublished = $datas['datePublished'];
 
-        if(empty($datePublished)){
+    if (isset($datas['articlePublished'])) {
+        $isPublished = 1;
+        $datePublished = $datas['articledatepublished'];
+
+        if (empty($datePublished)) {
             $datePublished = date("Y-m-d H:i:s");
-        }else{
+        } else {
             $datetime = strtotime($datePublished);
-            $datePublished = date("Y-m-s H:i:s",$datetime);
+            $datePublished = date("Y-m-s H:i:s", $datetime);
         }
-    }else{
+    } else {
         $isPublished = 0;
         $datePublished = null;
     }
 
-    $title = htmlspecialchars(strip_tags(trim($datas['title'])));
-    $text = htmlspecialchars(strip_tags(trim($datas['text'])));
 
-    if(empty($title)||empty($text)) return false;
+    $title = htmlspecialchars(strip_tags(trim($datas['articletitle'])));
+    $text = htmlspecialchars(strip_tags(trim($datas['articletext'])));
+    $slug = $title;
 
-    try{
-        $query->execute([$title,$text,$datePublished,$isPublished,$iduser]);
+    if (empty($title) || empty($text)) return false;
+
+    try {
+        $query->execute([$title, $slug, $text, $datePublished, $isPublished, $iduser]);
         return true;
-    }catch(Exception $e){
+    } catch (Exception $e) {
         die($e->getMessage());
     }
-
 }
 
 function getArticlePublished(PDO $conn): array
@@ -48,12 +49,12 @@ function getArticlePublished(PDO $conn): array
         ORDER BY a.`articledatepublished` DESC;
     ";
 
-    try{
+    try {
         $query = $conn->query($sql);
         $result = $query->fetchAll();
         $query->closeCursor();
         return $result;
-    }catch(Exception $e){
+    } catch (Exception $e) {
         die($e->getMessage());
     }
 }

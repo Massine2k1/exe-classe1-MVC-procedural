@@ -29,6 +29,13 @@
                         </div>
                         
                         <form method="POST" action="">
+                            <?php
+                            if(isset($error)):
+                            ?>
+                            <div class="text-danger mb-3"><?=$error?></div>
+                            <?php
+                            endif;
+                            ?>
                             <div class="mb-3">
                                 <label for="login" class="form-label">Login :</label>
                                 <div class="input-group">

@@ -1,4 +1,4 @@
-<?php
+ <?php
 # controller/PublicController.php
 if(isset($_GET["pageChanger"]) && $_GET["pageChanger"]==="connexion"){
     if(isset($_POST["userlogin"],$_POST["password"])){
