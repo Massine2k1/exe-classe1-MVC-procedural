@@ -20,38 +20,11 @@
     ?>
 
     <!-- Admin Dashboard -->
-    <div class="container-fluid mt-5 pt-4">
+    <div class="container-fluid mt-4 pt-4">
         <div class="row">
-            <!-- Sidebar -->
-            <div class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
-                <div class="position-sticky pt-3">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active text-white" href="#">
-                                <i class="fas fa-tachometer-alt me-2"></i>Tableau de bord
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">
-                                <i class="fas fa-users me-2"></i>Utilisateurs
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">
-                                <i class="fas fa-newspaper me-2"></i>Articles
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">
-                                <i class="fas fa-cog me-2"></i>Paramètres
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
 
             <!-- Main Content -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <main class="col-md-9 ms-sm-auto col-lg-12 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Tableau de bord administrateur</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
@@ -226,7 +199,13 @@
                     <div class="col-md-6">
                         <div class="card h-100" style="max-height:600px;">
                             <div class="card-header">
-                                <h5 class="mb-0">Articles</h5>
+                                <?php
+                                $nbArticle = count($article);
+                                $nbArticle > 1 ? $pluriel = "s" : $pluriel = "";
+                                ?>
+                                <h5 class="mb-0"><?= $nbArticle ?> Article<?= $pluriel ?></h5>
+                                <?php
+                                ?>
                             </div>
                             <div class="card-body" style="overflow-y: auto;">
                                 <?php

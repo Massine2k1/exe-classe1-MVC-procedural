@@ -30,6 +30,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="./?pageChanger=connexion">Connexion</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./?pageChanger=inscription">S'inscrire</a>
+                    </li>
                     <?php
                     endif;
                     ?>

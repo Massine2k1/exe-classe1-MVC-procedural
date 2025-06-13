@@ -14,7 +14,7 @@
 <body class="bg-light">
     <!-- Navigation -->
      <?php
-     include "menu.html.php"
+     include "menu.html.php";
      ?>
 
     <!-- Login Form -->

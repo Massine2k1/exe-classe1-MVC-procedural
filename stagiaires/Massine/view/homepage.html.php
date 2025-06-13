@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,11 +12,12 @@
     <!-- CSS personnalisé -->
     <link href="assets/css/style.css" rel="stylesheet">
 </head>
+
 <body>
     <!-- Navigation -->
-     <?php
-     include "menu.html.php"
-     ?>
+    <?php
+    include "menu.html.php"
+    ?>
     <!-- Hero Section -->
     <header class="hero-section">
         <div class="container h-100">
@@ -85,9 +87,15 @@
                     <h2 class="mb-3">Prêt à commencer?</h2>
                     <p class="lead mb-0">Rejoignez-nous dès maintenant et profitez de toutes nos fonctionnalités.</p>
                 </div>
+                <?php
+                if(!isset($_SESSION['username'])):
+                ?>
                 <div class="col-lg-4 text-lg-end">
-                    <a href="login.html" class="btn btn-light btn-lg">S'inscrire maintenant</a>
+                    <a href="./?pageChanger=inscription" class="btn btn-light btn-lg">S'inscrire maintenant</a>
                 </div>
+                <?php
+                endif;
+                ?>
             </div>
         </div>
     </section>
@@ -113,4 +121,5 @@
     <!-- JS personnalisé -->
     <script src="assets/js/main.js"></script>
 </body>
+
 </html>
